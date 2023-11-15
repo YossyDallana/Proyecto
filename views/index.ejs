@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Agrega las referencias a fullcalendar CSS y Moment.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" integrity="sha256-pC0tgJtsIbrS8vU99C9QVy8DEe9WDfiVx0M4AqtwqXY=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha256-vhxF/4zyXix0wYmXZSxc5tUDaFwG30AwP8Btfp5lSo=" crossorigin="anonymous"></script>
+    <!-- Agrega la referencia a fullcalendar JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js" integrity="sha256-B/6FFrBBR0cNAqktsrFeN5Czy4I25ki6JD/Yaz4d+0A=" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica W - Gestión de Citas</title>
+</head>
+<body>
+    <h1>Clínica W - Gestión de Citas</h1>
+    <form action="/agregar-cita" method="post">
+        <label for="cita">Nueva Cita:</label>
+        <input type="text" id="cita" name="cita" required>
+        <!-- Agrega el campo de fecha con fullcalendar -->
+        <div id="calendar"></div>
+        <button type="submit">Agregar Cita</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializa el calendario
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                // Configuración del calendario
+                plugins: ['dayGrid'],
+                defaultView: 'dayGridMonth',
+                selectable: true,
+                select: function(info) {
+                    document.getElementById('cita').value = moment(info.start).format('YYYY-MM-DD');
+                },
+            });
+            calendar.render();
+        });
+    </script>
+</body>
+</
